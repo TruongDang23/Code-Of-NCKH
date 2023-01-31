@@ -1,3 +1,5 @@
+import Human from "./Human"
+
 function DataHuman(props){
     let arrHuman=[]
     arrHuman[0]=new Human("Nguyen Hoang A",80,"Dong Nai",9999)
@@ -9,10 +11,3 @@ function DataHuman(props){
     return (arrHuman)
 }
 export default DataHuman
-function Human(name,age,address,id)
-{
-    this.name=name
-    this.age=age
-    this.address=address
-    this.id=id
-}
