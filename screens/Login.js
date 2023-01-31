@@ -47,7 +47,7 @@ function Login(props)
                         alignSelf:'center',
                         flexDirection:'row',
                     }}>
-                        <Text>Password  </Text>
+                        <Text>Your Password  </Text>
                         <TextBox/>
                     </View>
 
