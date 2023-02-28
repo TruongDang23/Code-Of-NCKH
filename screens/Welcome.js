@@ -5,7 +5,6 @@ import {
 } from 'react-native'
 import {UIButton} from '../components'
 import {colors, images} from '../constant'
-import Human from '../Main/Human'
 function Welcome(props)
 {
     //navigation

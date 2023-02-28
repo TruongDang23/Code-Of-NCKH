@@ -6,49 +6,42 @@ import {
 } from 'react-native'
 import {icons, images} from '../../constant'
 import {UIIcon} from '../../components'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import EstimateItem from './EstimateItem'
+import {ref,onValue} from 'firebase/database'
+import database from '../../firebase'
 
 function Estimate({navigation,route})
 {
     let name=route.params.name
-    const [estimates,setEstimate]=useState([
+    let id=route.params.id
+
+    let db=database
+
+    const[data,setDatas]=useState([
         {
-            time:'7:00 AM 4/1/23',
+            time:"7h50",
             avg:24,
-            timMach:17,
+            timMach:7,
             dotQuy:9,
-            nhoiMau:7,
-        },
-        {
-            time:'6:45 AM 5/1/23',
-            avg:25,
-            timMach:0,
-            dotQuy:0,
-            nhoiMau:0,
-        },
-        {
-            time:'8:00 AM 6/1/23',
-            avg:23,
-            timMach:17,
-            dotQuy:9,
-            nhoiMau:7,
-        },
-        {
-            time:'6:20 AM 7/1/23',
-            avg:24,
-            timMach:17,
-            dotQuy:9,
-            nhoiMau:7,
-        },
-        {
-            time:'7:15 AM 8/1/23',
-            avg:26,
-            timMach:0,
-            dotQuy:0,
-            nhoiMau:0,
+            nhoiMau:14,
         },
     ])
+
+    useEffect(()=>{
+        let dbRef=ref(db,'patient/'+id.toString()+'/estimate')
+        onValue(dbRef,(snapshot)=>{
+            let data=snapshot.val()
+            setDatas([{
+                time:"6h30",
+                avg:data.avg,
+                timMach:data.timMach,
+                dotQuy:data.dotQuy,
+                nhoiMau:data.nhoiMau
+            }])
+        })
+    },[])
+
     return (
         <View style={{ flex: 1 }}>
             <ImageBackground
@@ -81,7 +74,7 @@ function Estimate({navigation,route})
                         <UIIcon 
                         thisIcon={icons.estimate}
                         onPress={()=>{
-                            navigation.navigate('Estimate',{name:name})
+                            navigation.navigate('Estimate',{name:name,id:id})
                         }} />
                     </View>
                 </View>
@@ -90,7 +83,7 @@ function Estimate({navigation,route})
                     flex: 90,
                 }}>
                     <ScrollView>
-                        {estimates.map(eachEstimate => <EstimateItem estimate={eachEstimate} key={eachEstimate.time}/>)}
+                        {data.map(eachEstimate => <EstimateItem estimate={eachEstimate} key={eachEstimate.time}/>)}
                     </ScrollView>
                 </View>
             </ImageBackground>

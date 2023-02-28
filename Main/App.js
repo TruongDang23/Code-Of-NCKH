@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {Welcome,Login,Register,Find} from '../screens'
 import TabBar from './TabBar'
 const Stack=createNativeStackNavigator()
+
 export default function App(props){
     return (
         <NavigationContainer>

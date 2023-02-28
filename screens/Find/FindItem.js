@@ -6,10 +6,14 @@ import {icons} from '../../constant'
 import {
     UIIcon,
 } from '../../components'
+import database from '../../firebase'
+import {push,set,ref} from 'firebase/database'
 
 function FindItem(props)
 {
     let {name,age,address,id}=props.human
+    let user=props.keyUser
+
     return (
         <View>
             <View style={{
@@ -32,7 +36,12 @@ function FindItem(props)
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <UIIcon thisIcon={icons.add} />
+                    <UIIcon 
+                    thisIcon={icons.add} 
+                    onPress={()=>{ 
+                        Add(user,id)
+                        alert("SuccessFully") 
+                    }}/>
                 </View>
             </View>
             <View style={{
@@ -45,3 +54,12 @@ function FindItem(props)
     )
 }
 export default FindItem
+function Add(userID,id)
+{
+    const db=database
+    const postList=ref(db,'users/'+userID+'/theoDoi')
+    const newPost=push(postList)
+    set(newPost,{
+      id:id,
+    })
+}

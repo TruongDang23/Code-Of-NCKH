@@ -5,6 +5,7 @@ import {
 function EstimateItem(props)
 {
     let {time,avg,timMach,dotQuy,nhoiMau}=props.estimate
+    
     return(
         <View style={{
             height: 150,

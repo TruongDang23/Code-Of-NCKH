@@ -8,17 +8,32 @@ import {
     UIIcon,
     TextBox,
 } from '../../components'
-import { useState } from 'react'
 import HumanItem from './HumanItem'
-import DataHuman from '../../Main/DataHuman'
+import {ref,onValue} from 'firebase/database'
+import database from '../../firebase'
+import dataHuman from '../../Main/DataHuman'
 
-function Home(props)
+function Home({navigation,route})
 {
-    const [humans,setHumans]=useState(DataHuman)
-    //navigation
-    const { navigation, route } = props
-    //function of navigate to/back
-    const { navigate, goBack } = navigation
+    let key=route.params.key
+
+    let id=[]
+    let db=database
+    let dbRef=ref(db,'users/'+key+'/theoDoi')
+    onValue(dbRef,(snapshot)=>{
+        snapshot.forEach((childSnapshot)=>{
+            let childData=childSnapshot.val()
+            id.push(childData.id)
+        })
+    })
+
+    let humans=[]
+    id.forEach((eachId)=>{
+        dataHuman.forEach((eachHuman)=>{
+            if(eachId==eachHuman.id)
+                humans.push(eachHuman)
+        })
+    })
 
     return (
         <View style={{flex:1}}>
@@ -32,12 +47,16 @@ function Home(props)
                         justifyContent:'space-around',
                         marginTop:50,
                     }}>
-                        <UIIcon thisIcon={icons.home}/>
+                        <UIIcon 
+                        thisIcon={icons.home} 
+                        onPress={()=>{
+                            navigation.navigate('Home')
+                        }}/>
                         <TextBox/>
                         <UIIcon 
                         thisIcon={icons.logout}
                         onPress={()=>{
-                            navigate('Welcome')
+                            navigation.navigate('Welcome')
                         }}
                         />
                     </View>
@@ -50,8 +69,8 @@ function Home(props)
                                                         human={eachHuman}
                                                         key={eachHuman.id}
                                                         onPress={()=>{
-                                                            navigate('Estimate',{name:eachHuman.name}),
-                                                            navigate('Mornitor',{name:eachHuman.name})
+                                                            navigation.navigate('Estimate',{name:eachHuman.name,id:eachHuman.id}),
+                                                            navigation.navigate('Mornitor',{name:eachHuman.name,id:eachHuman.id})
                                                         }}
                                                       />)}
                         </ScrollView>

@@ -3,12 +3,43 @@ import {
     Text,
     ImageBackground,
 } from 'react-native'
-import {icons, images} from '../constant'
-import {UIIcon} from '../components'
+import {icons, images} from '../../constant'
+import {UIIcon} from '../../components'
+import Chart from './Chart'
+import {useState,useEffect} from 'react'
+import {ref,onValue} from 'firebase/database'
+import database from '../../firebase'
+
+var grip=[]
+var heartRate=[]
+var oxi=[]
 
 function Mornitor({navigation,route})
 {   
+    let db=database
+    let id=route.params.id
     let name=route.params.name
+
+    const[dataset,setDatas]=useState({
+        grip:0,
+        heartRate:0,
+        oxi:0,
+    })
+
+    useEffect(()=>{
+        let dbRef=ref(db,'patient/'+id.toString()+'/mornitor')
+        onValue(dbRef,(snapshot)=>{
+            let data=snapshot.val()
+            grip.push(data.grip)
+            heartRate.push(data.heartRate)
+            oxi.push(data.oxi)
+            setDatas({
+                    grip:data.grip,
+                    heartRate:data.heartRate,
+                    oxi:data.oxi,
+            })
+        })
+    },[])
 
     return (
         <View style={{ flex: 1 }}>
@@ -59,7 +90,7 @@ function Mornitor({navigation,route})
                         <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
                     </View>
                     <View style={{flex:26}}>
-
+                        <Chart data={heartRate}/>
                     </View>
                 </View>
 
@@ -75,7 +106,7 @@ function Mornitor({navigation,route})
                         <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
                     </View>
                     <View style={{flex:26}}>
-
+                        <Chart data={oxi}/>
                     </View>
                 </View>
 
@@ -91,7 +122,7 @@ function Mornitor({navigation,route})
                         <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
                     </View>
                     <View style={{flex:26}}>
-
+                        <Chart data={grip}/>
                     </View>
                 </View>
             </ImageBackground>

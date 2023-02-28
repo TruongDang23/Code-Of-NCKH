@@ -12,14 +12,11 @@ import FindItem from './FindItem'
 import { useState } from 'react'
 import DataHuman from '../../Main/DataHuman'
 
-function Find(props)
+function Find({navigation,route})
 {
+    let key=route.params.key
+
     const [humans,setHumans]=useState(DataHuman)
-    //navigation
-    const { navigation, route } = props
-    //function of navigate to/back
-    const { navigate, goBack } = navigation
-    const [text,setText] = useState('')
     const [suitableHumans,setSuitableHumans]=useState([
         {
             name:'',
@@ -28,6 +25,8 @@ function Find(props)
             id:0,
         }
     ])
+    const [text,setText] = useState('')
+    
     return (
         <View style={{flex:1}}>
             <ImageBackground
@@ -43,24 +42,24 @@ function Find(props)
                         <UIIcon 
                         thisIcon={icons.home}
                         onPress={()=>{
-                            navigate('Home')
+                            navigation.navigate('Home')
                         }}
                         />
 
                         <TextBox 
                         onChangeText={(text) => setText(text)}
                         value={text}
-                        placeholder="Name: Nguyen Van A"/>
+                        placeholder="ID: 0000"/>
 
                         <UIIcon 
                         thisIcon={icons.find}
                         onPress={() => {
                             if(text=='')
-                                alert('Please type the name')
+                                alert('Please type the ID')
                             else
                             {
                                 let human=humans.map(eachHuman => {
-                                    if(eachHuman.name==text)
+                                    if(eachHuman.id==text)
                                         return{...eachHuman}
                                     else
                                         return {eachHuman,id:0}
@@ -78,7 +77,7 @@ function Find(props)
                             {
                                 suitableHumans.map(eachSuitable => {
                                     if (eachSuitable.id != 0)
-                                        return <FindItem human={eachSuitable} key={eachSuitable.id} />
+                                        return <FindItem human={eachSuitable} key={eachSuitable.id} keyUser={key}/>
                                 })
                             }
                         </ScrollView>

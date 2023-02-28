@@ -36,14 +36,15 @@ const screenOptions=({route})=>({
         />
     }
 })
-function TabBar(props){
+function TabBar({route}){
+    let key=route.params.key
     return (
         <Tab.Navigator screenOptions={screenOptions}>
-            <Tab.Screen name={"Home"} component={Home}/>
+            <Tab.Screen name={"Home"} component={Home} initialParams={{key:key}}/>
             <Tab.Screen name={"Mornitor"} component={Mornitor} initialParams={{name:"None"}}/>
             <Tab.Screen name={"Estimate"} component={Estimate} initialParams={{name:"None"}}/>
             <Tab.Screen name={"Notify"} component={Notify}/> 
-            <Tab.Screen name={"Find"} component={Find}/>
+            <Tab.Screen name={"Find"} component={Find} initialParams={{key:key}}/>
         </Tab.Navigator>
     )
 }

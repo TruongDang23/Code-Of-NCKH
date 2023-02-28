@@ -7,9 +7,9 @@ class Human
         this.address=address
         this.id=id
     }
-    Say()
+    getName()
     {
-        return "Hello I'm "+this.name
+        return "my name is"
     }
 }
 export default Human
