@@ -36,18 +36,21 @@ function Welcome(props)
                 }}>
                     <UIButton 
                     onPress={()=>{
-                        navigate('Register')
-                    }}
-                    bgColor='white'
-                    title='SIGN UP'
-                    letterColor={colors.main}
-                    />
-                    <UIButton 
-                    onPress={()=>{
                         navigate('Login')
                     }}
                     title='LOGIN'
-                    letterColor='white'
+                    letterColor='#155DAD'
+                    color='#155DAD'
+                    />
+
+                    <UIButton 
+                    onPress={()=>{
+                        navigate('Register')
+                    }}
+                    bgColor={colors.main}
+                    color={colors.main}
+                    title='SIGN UP'
+                    letterColor={'white'}
                     />
                 </View>
             </ImageBackground>

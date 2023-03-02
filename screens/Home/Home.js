@@ -2,6 +2,7 @@ import {
     View,
     ImageBackground,
     ScrollView,
+    Text,
 } from 'react-native'
 import {icons, images} from '../../constant'
 import {
@@ -39,6 +40,7 @@ function Home({navigation,route})
         <View style={{flex:1}}>
             <ImageBackground
                 source={images.background}
+                blurRadius={5}
                 resizeMode='cover'
                 style={{flex:1}}>
                     <View style={{
@@ -52,7 +54,10 @@ function Home({navigation,route})
                         onPress={()=>{
                             navigation.navigate('Home')
                         }}/>
-                        <TextBox/>
+                        <Text style={{ 
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                        }}>DANH SÁCH NGƯỜI THÂN</Text>
                         <UIIcon 
                         thisIcon={icons.logout}
                         onPress={()=>{

@@ -22,6 +22,7 @@ function Register(props)
         <View style={{flex:1}}>
             <ImageBackground 
              source={images.background}
+             blurRadius={5}
              resizeMode='cover'
              style={{flex:1}}>
                 <View style={{
@@ -45,10 +46,11 @@ function Register(props)
                         alignSelf:'center',
                         flexDirection:'row',
                     }}>
-                        <Text>Name:      </Text>
                         <TextBox 
                             onChangeText={typeName=>setName(typeName)}
                             value={name}
+                            color={'white'}
+                            placeholder="NAME"
                         />
                     </View>
 
@@ -56,10 +58,11 @@ function Register(props)
                         alignSelf:'center',
                         flexDirection:'row',
                     }}>
-                        <Text>Email:       </Text>
                         <TextBox
                             onChangeText={typeEmail=>setEmail(typeEmail)}
                             value={email}
+                            color={'white'}
+                            placeholder="EMAIL"
                         />
                     </View>
 
@@ -67,10 +70,12 @@ function Register(props)
                         alignSelf:'center',
                         flexDirection:'row',
                     }}>
-                        <Text>Password: </Text>
                         <TextBox
                             onChangeText={typePass=>setPass(typePass)}
                             value={pass}
+                            color={'white'}
+                            secure={true}
+                            placeholder="PASSWORD"
                         />
                     </View>
 

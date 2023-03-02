@@ -23,6 +23,7 @@ function Login(props)
         <View style={{flex:1}}>
             <ImageBackground 
              source={images.background}
+             blurRadius={5}
              resizeMode='cover'
              style={{flex:1}}>
                 <View style={{
@@ -46,10 +47,11 @@ function Login(props)
                         alignSelf:'center',
                         flexDirection:'row',
                     }}>
-                        <Text>Email        </Text>
                         <TextBox
                             onChangeText={typeEmail=>setEmail(typeEmail)}
                             value={email}
+                            placeholder="EMAIL"
+                            color={'#155DAD'}
                         />
                     </View>
 
@@ -57,10 +59,12 @@ function Login(props)
                         alignSelf:'center',
                         flexDirection:'row',
                     }}>
-                        <Text>Password  </Text>
                         <TextBox
                             onChangeText={typePass=>setPass(typePass)}
                             value={pass}
+                            secure={true}
+                            placeholder="PASSWORD"
+                            color={'#155DAD'}
                         />
                     </View>
 
@@ -73,8 +77,8 @@ function Login(props)
                                 alert("User not available!")
                         }}
                         title='LOGIN'
-                        letterColor={colors.main}
-                        bgColor='white'
+                        letterColor='#155DAD'
+                        color='#155DAD'
                     />
                 </View>
             </ImageBackground>

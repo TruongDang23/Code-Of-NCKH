@@ -46,6 +46,7 @@ function Estimate({navigation,route})
         <View style={{ flex: 1 }}>
             <ImageBackground
                 source={images.background}
+                blurRadius={5}
                 resizeMode='cover'
                 style={{ flex: 1 }}>
                 <View style={{
