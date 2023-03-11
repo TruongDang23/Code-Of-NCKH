@@ -8,7 +8,7 @@ function EstimateItem(props)
     
     return(
         <View style={{
-            height: 150,
+            height: 170,
             padding: 10,
         }}>
             <Text style={{

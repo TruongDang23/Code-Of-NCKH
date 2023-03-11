@@ -5,11 +5,12 @@ const screenWidth = Dimensions.get("window").width;
 function Chart(props) {
     let dataset=[]
     let newData=props.data
+    let label=["Test","Ok","Hehe","Haha"]
     newData.map((eachData) => dataset.push(eachData))
     return (
         <LineChart
             data={{
-                labels: ["Time",],
+                labels: label,
                 datasets: [
                     {
                         data:dataset
@@ -18,24 +19,20 @@ function Chart(props) {
             }}
             width={Dimensions.get("window").width} // from react-native
             height={200}
-            yAxisLabel=""
-            yAxisSuffix=""
+            withDots={false}
+            withShadow={false}
+            withVerticalLines={false}
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-                backgroundColor: "#000",
-                backgroundGradientFrom: "#000",
-                backgroundGradientTo: "#fff",
+                backgroundColor: "white",//"#000",
+                backgroundGradientFrom: "white",//"#000"
+                backgroundGradientTo: "white",//"#fff"
                 decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 10) => `rgba(2, 293, 25, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                color:() => `rgba(52, 98, 156, 0.8)`,
+                labelColor: () => 'black',//`rgba(255, 255, 255, ${opacity})`,
                 style: {
                     borderRadius: 16
                 },
-                propsForDots: {
-                    r: "6",
-                    strokeWidth: "5",
-                    stroke: "#fff"
-                }
             }}
             bezier
             style={{

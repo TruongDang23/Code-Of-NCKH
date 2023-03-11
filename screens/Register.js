@@ -49,7 +49,7 @@ function Register(props)
                         <TextBox 
                             onChangeText={typeName=>setName(typeName)}
                             value={name}
-                            color={'white'}
+                            color={'#155DAD'}
                             placeholder="NAME"
                         />
                     </View>
@@ -61,7 +61,7 @@ function Register(props)
                         <TextBox
                             onChangeText={typeEmail=>setEmail(typeEmail)}
                             value={email}
-                            color={'white'}
+                            color={'#155DAD'}
                             placeholder="EMAIL"
                         />
                     </View>
@@ -73,7 +73,7 @@ function Register(props)
                         <TextBox
                             onChangeText={typePass=>setPass(typePass)}
                             value={pass}
-                            color={'white'}
+                            color={'#155DAD'}
                             secure={true}
                             placeholder="PASSWORD"
                         />

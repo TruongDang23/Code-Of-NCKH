@@ -11,6 +11,7 @@ import EstimateItem from './EstimateItem'
 import {ref,onValue} from 'firebase/database'
 import database from '../../firebase'
 
+let datas=[]
 function Estimate({navigation,route})
 {
     let name=route.params.name
@@ -31,16 +32,23 @@ function Estimate({navigation,route})
     useEffect(()=>{
         let dbRef=ref(db,'patient/'+id.toString()+'/estimate')
         onValue(dbRef,(snapshot)=>{
-            let data=snapshot.val()
+            let data=snapshot.val()   
+            datas.push({time:"6h30",
+                avg:data.avg,
+                timMach:data.timMach,
+                dotQuy:data.dotQuy,
+                nhoiMau:data.nhoiMau
+            })
             setDatas([{
                 time:"6h30",
                 avg:data.avg,
                 timMach:data.timMach,
                 dotQuy:data.dotQuy,
                 nhoiMau:data.nhoiMau
-            }])
+            }]) 
         })
     },[])
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -84,7 +92,7 @@ function Estimate({navigation,route})
                     flex: 90,
                 }}>
                     <ScrollView>
-                        {data.map(eachEstimate => <EstimateItem estimate={eachEstimate} key={eachEstimate.time}/>)}
+                        {datas.map(eachEstimate => <EstimateItem estimate={eachEstimate} key={eachEstimate.time}/>)}
                     </ScrollView>
                 </View>
             </ImageBackground>
